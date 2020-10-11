@@ -1,0 +1,193 @@
+<div class="card">
+    <div class="card-header">
+        Sign Up!
+    </div>
+
+    <div class="card-body">
+        <form novalidate
+              (ngSubmit)="save()"
+              [formGroup]="form">
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label"
+                       for="firstNameId">First Name</label>
+                <div class="col-md-8">
+                    <input class="form-control"
+                           id="firstNameId"
+                           type="text"
+                           placeholder="First Name (required)"
+                           formControlName="firstName"
+                           [ngClass]="{'is-invalid': (form.get('firstName').touched ||
+                                            form.get('firstName').dirty) &&
+                                            !form.get('firstName').valid }" />
+                    <span class="invalid-feedback">
+            <span *ngIf="form.get('firstName').errors?.required">
+              Please enter your first name.
+            </span>
+            <span *ngIf="form.get('firstName').errors?.minlength">
+              The first name must be longer than 3 characters.
+            </span>
+          </span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label"
+                       for="lastNameId">Last Name</label>
+                <div class="col-md-8">
+                    <input class="form-control"
+                           id="lastNameId"
+                           type="text"
+                           placeholder="Last Name (required)"
+                           formControlName="lastName"
+                           [ngClass]="{'is-invalid': (form.get('lastName').touched ||
+                                            form.get('lastName').dirty) &&
+                                            !form.get('lastName').valid }" />
+                    <span class="invalid-feedback">
+            <span *ngIf="form.get('lastName').errors?.required">
+              Please enter your last name.
+            </span>
+            <span *ngIf="form.get('lastName').errors?.maxlength">
+              The last name must be less than 50 characters.
+            </span>
+          </span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label"
+                       for="phoneId">Phone</label>
+                <div class="col-md-8">
+                    <input class="form-control"
+                           id="phoneId"
+                           type="tel"
+                           placeholder="Phone"
+                           formControlName="phone"
+                           [ngClass]="{'is-invalid': !form.get('phone').valid }" />
+                    <span class="invalid-feedback">
+            <span *ngIf="form.get('phone').errors?.required">
+              Please enter your phone number.
+            </span>
+          </span>
+                </div>
+            </div>
+
+            <div formGroupName="emailGroup">
+                <div class="form-group row mb-2">
+                    <label class="col-md-2 col-form-label"
+                           for="emailId">Email</label>
+                    <div class="col-md-8">
+                        <input class="form-control"
+                               id="emailId"
+                               type="email"
+                               placeholder="Email (required)"
+                               formControlName="email"
+                               [ngClass]="{'is-invalid': emailMessage }" />
+                        <span class="invalid-feedback">
+              {{ emailMessage }}
+            </span>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-md-2 col-form-label"
+                           for="confirmEmailId">Confirm Email</label>
+                    <div class="col-md-8">
+                        <input class="form-control"
+                               id="confirmEmailId"
+                               type="email"
+                               placeholder="Confirm Email (required)"
+                               formControlName="confirmEmail"
+                               [ngClass]="{'is-invalid': form.get('emailGroup').errors ||
+                                             ((form.get('emailGroup.confirmEmail').touched ||
+                                             form.get('emailGroup.confirmEmail').dirty) &&
+                                              !form.get('emailGroup.confirmEmail').valid) }" />
+                        <span class="invalid-feedback">
+              <span *ngIf="form.get('emailGroup.confirmEmail').errors?.required">
+                Please confirm your email address.
+              </span>
+              <span *ngIf="form.get('emailGroup').errors?.match">
+                The confirmation does not match the email address.
+              </span>
+            </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label"
+                       for="passwordId">Password</label>
+                <div class="col-md-8">
+                    <input class="form-control"
+                           id="passwordId"
+                           type="password"
+                           placeholder="password"
+                           formControlName="password"
+                           [ngClass]="{'is-invalid': !form.get('password').valid }" />
+                    <span class="invalid-feedback">
+            <span *ngIf="form.get('password').errors?.required">
+              Please enter a password .
+            </span>
+              <span *ngIf="form.get('password').errors?.minlength">
+              the password must be longer than 8 characters  .
+            </span>
+          </span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label"
+                       for="AddressId">Address</label>
+                <div class="col-md-8">
+                    <input class="form-control"
+                           id="AddressId"
+                           type="text"
+                           placeholder="Address (required)"
+                           formControlName="Address"
+                           [ngClass]="{'is-invalid': !form.get('Address').valid }">
+                    <span class="invalid-feedback">
+                  <span *ngIf="form.get('Address').errors?.required">
+                    Please enter your address.
+                  </span>
+                </span>
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label"
+                       for="VilleId">Ville, Codepostal </label>
+                <div class="col-md-3">
+                    <input class="form-control"
+                           id="VilleId"
+                           type="text"
+                           placeholder="Ville"
+                           formControlName="Ville">
+
+                <div class="col-md-2">
+                    <input class="form-control"
+                           id="Codepostal"
+                           type="number"
+                           placeholder="Codepostal"
+                           formControlName="Codepostal">
+                </div>
+            </div>
+            </div>
+                <div class="form-group row mb-2">
+                    <div class="offset-md-2 col-md-4">
+                        <button class="btn btn-primary mr-3"
+                                type="submit"
+                                style="width:80px"
+                                [title]="form.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                                [disabled]="!form.valid">
+                            Save
+                        </button>
+        </div>
+    </div>
+    </form>
+</div>
+</div>
+<br>Dirty: {{ form.dirty }}
+<br>Touched: {{ form.touched }}
+<br>Valid: {{form.valid }}
+<br>Value: {{ form.value | json }}
+
